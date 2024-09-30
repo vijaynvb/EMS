@@ -48,8 +48,9 @@ namespace EMS.Implementation
         public Employee UpdateEmployee(int id, int Age)
         {
             Employee employee = employees.Find(x => x.Id == id);
-
-            return newEmployeeValye;
+            employees.Remove(employee);
+            employees.Add(employee);
+            return employee;
 
         }
     }

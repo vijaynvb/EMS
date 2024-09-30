@@ -41,13 +41,20 @@ namespace EMS
                     case 2:
                         int empid1 = Utils.ReadInt("Enter EmployeeId: ");
                         int age1 = Utils.ReadInt("Enter Age: ");
-                        employeeImp.UpdateEmployee(empid1, age1);
+                        var emp = employeeImp.UpdateEmployee(empid1, age1);
+                        if (emp != null)
+                            Console.WriteLine("Employee {0} Updated successfully", emp.Name);
                         break;
                     case 3:
                         int empid2 = Utils.ReadInt("Enter EmployeeId: ");
+                        Employee emp2 = employeeImp.GetEmployeeById(empid2);
+                        Console.WriteLine("Id: {0} Employee Name: {1}",emp2.Id,emp2.Name);
                         break;
                     case 4:
                         int empid3 = Utils.ReadInt("Enter EmployeeId: ");
+                        var emp1 = employeeImp.DeleteEmployee(empid3);
+                        if (emp1 != null)
+                            Console.WriteLine("Employee {0} deleted successfully", emp1.Name);
                         break;
                     case 5:
                         List<Employee> employees = employeeImp.GetEmployees();

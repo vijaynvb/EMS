@@ -15,7 +15,7 @@ namespace EMS.Interfaces
 
         public Employee AddEmployee(Employee employee);
 
-        public Employee UpdateEmployee(int id,Employee employee);
+        public Employee UpdateEmployee(int id, int Age);
 
         public Employee DeleteEmployee(int id);
     }
