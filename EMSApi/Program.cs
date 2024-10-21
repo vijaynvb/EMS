@@ -1,25 +1,46 @@
+
+/*
+ * 
+ * 1. create web applicaion
+ * 2. add services [Controllers, Database, Swagger, Vaidation framework, DI]
+ * 3. configure serives
+ * 
+ */
+
+using EMSApi.Implementation;
+using EMSApi.Utils;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// builder.Services.AddSingleton<ILogs, DBLogs>();
+builder.Services.AddSingleton<EmployeStaticImp, EmployeStaticImp>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer(); // OAS - JSON File 
+    builder.Services.AddSwaggerGen(); // UI - Application index.html
+    builder.Services.AddLogging();
 
-var app = builder.Build();
+    
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    var app = builder.Build();
 
-app.UseHttpsRedirection();
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger(); // swagger.json
+        app.UseSwaggerUI(); // index.html
+    }
 
-app.UseAuthorization();
+    app.UseHttpsRedirection();// ssl self signed or thrid party signed verizone
+    // middle wares
+    /*app.UseAuthentication();
+    app.UseAuthorization();
+    app.UseHttpLogging();*/
 
-app.MapControllers();
+    
+    // asp.net framework will map this 
+    app.MapControllers(); // method -> look for controllers folder where all the end points will be configured
 
-app.Run();
+    app.Run();

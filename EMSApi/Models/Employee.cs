@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMSApi.Models
 {
+    // poco
     public class Employee
     {
         public int Id { get; set; }

@@ -1,5 +1,6 @@
 ﻿using EMSApi.Interfaces;
 using EMSApi.Models;
+using EMSApi.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace EMSApi.Implementation
 {
-    class EmployeStaticImp : IEmployee // store the data in a give application -> db files, memory
+    public class EmployeStaticImp : IEmployee // store the data in a give application -> db files, memory
     {
+       // private FileLogs _logs;
         private List<Employee> employees = new List<Employee>();
 
         public EmployeStaticImp()
@@ -20,8 +22,14 @@ namespace EMSApi.Implementation
             employees.Add(new Employee(4, "veeru", 3));
         }
 
+        /*public EmployeStaticImp(FileLogs logs)
+        {
+            this._logs = logs;
+        }*/
+
         public Employee AddEmployee(Employee employee)
         {
+            //_logs.WriteLog("add employee implementation called");
             employees.Add(employee);
             return employee;
         }
@@ -42,6 +50,7 @@ namespace EMSApi.Implementation
 
         public List<Employee> GetEmployees()
         {
+            //_logs.WriteLog("get all employees implementation called");
             return employees;
         }
 

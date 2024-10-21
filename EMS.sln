@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMS", "EMS\EMS.csproj", "{860526BD-CCEF-4436-AFB5-E13F75891FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMSApi", "EMSApi\EMSApi.csproj", "{1B6CB27D-64F4-4C38-B7BB-FE102327FCF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMSApi", "EMSApi\EMSApi.csproj", "{1B6CB27D-64F4-4C38-B7BB-FE102327FCF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareExample", "MiddlewareExample\MiddlewareExample.csproj", "{71596AAA-57BB-4919-A2EB-C1D85F5E589B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1B6CB27D-64F4-4C38-B7BB-FE102327FCF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B6CB27D-64F4-4C38-B7BB-FE102327FCF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B6CB27D-64F4-4C38-B7BB-FE102327FCF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71596AAA-57BB-4919-A2EB-C1D85F5E589B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71596AAA-57BB-4919-A2EB-C1D85F5E589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71596AAA-57BB-4919-A2EB-C1D85F5E589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71596AAA-57BB-4919-A2EB-C1D85F5E589B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

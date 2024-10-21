@@ -1,5 +1,6 @@
 ﻿using EMSApi.Implementation;
 using EMSApi.Models;
+using EMSApi.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,15 +11,28 @@ namespace EMSApi.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        EmployeStaticImp employeeImp = new EmployeStaticImp();
+        // ILogs _logs;
+        EmployeStaticImp employeeImp;
+
+        // DI is going to inject the File logs object
+        /*public EmployeesController(ILogs logs, EmployeStaticImp empImp)
+        {
+            _logs = logs;
+            employeeImp= empImp;
+        }*/
+
+        public EmployeesController(EmployeStaticImp emsImpl)
+        {
+            employeeImp =emsImpl;
+        }
 
         // GET: api/<EmployeesController>
         [HttpGet]
         public List<Employee> Get()
         {
-            // return data as json 
-            // response - 4 components
+            //_logs.WriteLog("Get All employees was called");
             List<Employee> employees = employeeImp.GetEmployees();
+            //_logs.WriteLog("got all employeess");
             return employees;
         }
 
