@@ -7,8 +7,10 @@
  * 
  */
 
+using EMSApi.Data;
 using EMSApi.Implementation;
 using EMSApi.Utils;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddSingleton<ILogs, DBLogs>();
 builder.Services.AddSingleton<EmployeStaticImp, EmployeStaticImp>();
 
-builder.Services.AddControllers();
+builder.Services.AddDbContext<EMSDbContext>();
+builder.Services.AddControllers(); 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer(); // OAS - JSON File 
     builder.Services.AddSwaggerGen(); // UI - Application index.html
