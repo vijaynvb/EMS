@@ -14,6 +14,8 @@ namespace EMSApi.Models
         [Column("DepartmentName", TypeName = "ntext")]
         public string Name { get; set; }
 
+        public List<Employee> Employees { get; set; }
+
         public Department()
         {
 

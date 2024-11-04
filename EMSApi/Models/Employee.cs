@@ -20,6 +20,7 @@ namespace EMSApi.Models
         [Column("EmployeeId")]
         public string EmpNo { get; set; }
 
+        public Department Department { get; set; }
         public Employee()
         {
         }
