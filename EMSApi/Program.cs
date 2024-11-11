@@ -9,6 +9,7 @@
 
 using EMSApi.Data;
 using EMSApi.Implementation;
+using EMSApi.Interfaces;
 using EMSApi.Utils;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,24 +17,40 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // builder.Services.AddSingleton<ILogs, DBLogs>();
-builder.Services.AddSingleton<EmployeStaticImp, EmployeStaticImp>();
+
+//builder.Services.AddSingleton<IEmployee, EmployeStaticImp>();
+builder.Services.AddScoped<IEmployee, EmployeeDbImpl>();
 
 builder.Services.AddDbContext<EMSDbContext>();
-builder.Services.AddControllers(); 
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer(); // OAS - JSON File 
+builder.Services.AddControllers();
+#region :: issue ::
+//.AddXmlDataContractSerializerFormatters()
+//                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+#endregion
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer(); // OAS - JSON File 
     builder.Services.AddSwaggerGen(); // UI - Application index.html
     builder.Services.AddLogging();
 
     
-
     var app = builder.Build();
 
+    
+    
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger(); // swagger.json
         app.UseSwaggerUI(); // index.html
+    }
+
+    using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+    {
+        var context = serviceScope.ServiceProvider.GetService<EMSDbContext>();
+        
+        // on every restart of the application create new db
+        // only if schema updates are their apply the changes 
+        context.Database.Migrate();
     }
 
     app.UseHttpsRedirection();// ssl self signed or thrid party signed verizone

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMSApi.Migrations
 {
     [DbContext(typeof(EMSDbContext))]
-    [Migration("20241104090422_init")]
+    [Migration("20241111041145_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,9 @@ namespace EMSApi.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmpNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -64,7 +67,25 @@ namespace EMSApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("EMSApi.Models.Employee", b =>
+                {
+                    b.HasOne("EMSApi.Models.Department", "Department")
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("EMSApi.Models.Department", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

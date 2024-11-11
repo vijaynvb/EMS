@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMSApi.Migrations
 {
     [DbContext(typeof(EMSDbContext))]
-    [Migration("20241104111747_enablerelationship")]
-    partial class enablerelationship
+    [Migration("20241111041447_modifiedempoyee")]
+    partial class modifiedempoyee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,11 +55,6 @@ namespace EMSApi.Migrations
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
-
-                    b.Property<string>("EmpNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("EmployeeId");
 
                     b.Property<string>("Name")
                         .IsRequired()

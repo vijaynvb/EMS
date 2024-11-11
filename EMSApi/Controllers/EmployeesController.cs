@@ -1,4 +1,5 @@
 ﻿using EMSApi.Implementation;
+using EMSApi.Interfaces;
 using EMSApi.Models;
 using EMSApi.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,8 @@ namespace EMSApi.Controllers
     public class EmployeesController : ControllerBase
     {
         // ILogs _logs;
-        EmployeStaticImp employeeImp;
+        //EmployeStaticImp employeeImp;
+        IEmployee employeeImp;
 
         // DI is going to inject the File logs object
         /*public EmployeesController(ILogs logs, EmployeStaticImp empImp)
@@ -21,7 +23,7 @@ namespace EMSApi.Controllers
             employeeImp= empImp;
         }*/
 
-        public EmployeesController(EmployeStaticImp emsImpl)
+        public EmployeesController(IEmployee emsImpl)
         {
             employeeImp =emsImpl;
         }

@@ -17,8 +17,6 @@ namespace EMSApi.Models
         public string Name { get; set; }
         public int Age { get; set; }
         
-        [Column("EmployeeId")]
-        public string EmpNo { get; set; }
 
         public Department Department { get; set; }
         public Employee()

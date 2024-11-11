@@ -9,10 +9,13 @@ namespace EMSApi.Data
         // where to connect connection string 
         // what is schema of the db -> Table object
         public IConfiguration _config { get; }
+
+
         public EMSDbContext(IConfiguration config)
         {
             _config = config;
         }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
