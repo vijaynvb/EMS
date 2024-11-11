@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 namespace EMSApi.Models
 {
     // poco
-    public class Employee
+    public class Employee // Task
     {
         //[Key] // configuration for efc
         
         public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+        public string? Email { get; set; }
         
-
-        public Department Department { get; set; }
+        public int DepartmentId { get; set; }
+        //public Department Department { get; set; } // user 
         public Employee()
         {
         }

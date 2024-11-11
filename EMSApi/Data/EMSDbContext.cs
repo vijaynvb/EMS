@@ -24,6 +24,15 @@ namespace EMSApi.Data
             base.OnConfiguring(optionsBuilder);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // fluent api
+            SeedData.InsertDepartments(modelBuilder);
+            SeedData.InsertEmployees(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         // tables 
         public DbSet<Employee> Employees { get; set; }
 

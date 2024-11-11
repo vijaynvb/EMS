@@ -1,8 +1,11 @@
-﻿using EMSApi.Implementation;
+﻿using EMSApi.DTO;
+using EMSApi.Implementation;
 using EMSApi.Interfaces;
 using EMSApi.Models;
 using EMSApi.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,40 +32,84 @@ namespace EMSApi.Controllers
         }
 
         // GET: api/<EmployeesController>
+
+        // api/employees
         [HttpGet]
-        public List<Employee> Get()
+        public ActionResult<List<Employee>> Get() // action , IActionResult
         {
             //_logs.WriteLog("Get All employees was called");
             List<Employee> employees = employeeImp.GetEmployees();
+            if(employees == null)
+                return NoContent();
             //_logs.WriteLog("got all employeess");
-            return employees;
+
+            return Ok(employees); // data -> body, status, http version, http headers
         }
 
         // GET api/<EmployeesController>/5
+        // api/employees/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public ActionResult<Employee> Get(int id)
         {
-            return employeeImp.GetEmployeeById(id);
+            Employee emp = employeeImp.GetEmployeeById(id);
+            if (emp == null)
+                return NotFound();
+            return Ok(emp);
         }
 
         // POST api/<EmployeesController>
         [HttpPost]
-        public void Post([FromBody] Employee emp)
+
+        // model binding -> validation framework
+        [SwaggerResponse(((int)HttpStatusCode.OK))]
+        [SwaggerResponse(((int)HttpStatusCode.BadRequest))]
+        [SwaggerResponse(((int)HttpStatusCode.Created))]
+
+        public ActionResult<Employee> Post([FromBody] EmployeeDTO emp) // employee age should be 18 above
         {
-            Employee newEmp =  employeeImp.AddEmployee(emp);
-            return;
+            if(emp.Age < 18)
+            {
+                ModelState.AddModelError("Age", "Invalid age");
+                return BadRequest(ModelState);
+            }
+
+
+            Employee employeeValue = new Employee();
+            employeeValue.Name = emp.Name;
+            employeeValue.Age = emp.Age;
+            employeeValue.DepartmentId = emp.DepartmentId;
+            employeeValue.Email = emp.Email;
+
+            Employee newEmp =  employeeImp.AddEmployee(employeeValue);
+
+            if(newEmp == null)
+                return BadRequest();
+
+            return Created("",newEmp);
         }
 
         // PUT api/<EmployeesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Employee> Put(int id, [FromBody] string value)
         {
+            Employee newEmp = employeeImp.UpdateEmployee(id, 1);
+
+            if (newEmp == null)
+                return BadRequest();
+
+            return Accepted("", newEmp);
         }
 
         // DELETE api/<EmployeesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Employee> Delete(int id)
         {
+            Employee newEmp = employeeImp.DeleteEmployee(id);
+
+            if (newEmp == null)
+                return NotFound();
+
+            return Accepted("", newEmp);
         }
     }
 }

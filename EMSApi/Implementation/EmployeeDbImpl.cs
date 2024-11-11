@@ -39,7 +39,9 @@ namespace EMSApi.Implementation
 
         public List<Employee> GetEmployees()
         {
-           return _dbContext.Employees.ToList();
+            // select Employee.id,Employee.Age, Department.Id,Department.name from Employee, Department join employee.departmentid == department.departmentid
+            //return _dbContext.Employees.Include(e => e.Department).ToList();
+            return _dbContext.Employees.ToList();
         }
 
         public Employee UpdateEmployee(int id, int Age)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EMSApi.Models
 {
-    public class Department
+    public class Department // User
     {
         [Key]
         public int DepartmentId { get; set; }
@@ -14,7 +14,7 @@ namespace EMSApi.Models
         [Column("DepartmentName", TypeName = "ntext")]
         public string Name { get; set; }
 
-        public List<Employee> Employees { get; set; }
+        public List<Employee> Employees { get; set; } // list of tasks
 
         public Department()
         {
